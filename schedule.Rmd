@@ -1,0 +1,53 @@
+---
+title: "Schdule for iCOTS 2014 Workshop"
+author: "R Pruim, D Kaplan, N Horton"
+date: "July 12, 2014"
+output: html_document
+---
+
+
+
+iCOTS 2014 Workshop
+-------------------
+
+## Teaching Statistics with R and RStudio
+
+### Access to the RStudio Server at Calvin College
+
+Each workshop participant has been given an account on an [RStudio server at Calvin College](http://acc.calvin.edu:8787).  At the workshop you will be given login credentials.
+
+#### Working on your own machine
+You are welcome to use a local installation of R and RStudio, but we will not have time during the workshop to help you install and configure the software on your machine. *We recommend that you use the RStudio server account,  even if you are familiar with R and RStudio and have access to it locally or on another server.*
+
+If you choose to work on your own machine, be sure to install (a recent version of) the `mosaic` package using
+```{r eval=FALSE}
+install.packages("mosaic")    # this should be at least version 0.9
+```
+To get an even more recent version, use
+```{r eval=FALSE}
+install.packages("devtools")
+require(devtools)
+install_github("mosaic","rpruim")
+```
+
+### Feedback
+
+Use this  [google doc](https://docs.google.com/document/d/1Q5a2lk9wNgUex5H60RXFgg4GjdQ9KGuJfpmnqPZHeXg/edit?usp=sharing) to provide some feed back as the workshop goes along.
+
+### Saturday Afternoon, July 12, 2014
+
+1. Welcome
+#. Getting onto your [RStudio server](http://acc.calvin.edu:8787) account
+#. An introduction to R in RStudio [Nick]
+#. [Less Volume, More Creativity](Slides/LessVolume.html) -- a quick start guide to R [Randy]
+#. Using RMarkdown in the classroom [Nick]
+#. What are the biggest obstacles to teaching with R?   Use this [google doc](https://docs.google.com/document/d/1Q5a2lk9wNgUex5H60RXFgg4GjdQ9KGuJfpmnqPZHeXg/edit?usp=sharing) to contribute
+your ideas.
+
+### Sunday Afternoon, July 13, 2014
+
+1. Resampling
+#. Other topics TBD
+
+
+
