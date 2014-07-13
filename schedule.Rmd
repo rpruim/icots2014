@@ -58,7 +58,7 @@ to R [Randy]
   * [the mosaic template](Resources/MarkdownTemplate-Rmd.html)
   
 2. Sampling and Resampling in R [Danny]
-  * [Slides](Slides/SamplingResampling/TeachingWithSampling.html) and the [Rmd document](TeachingWithSampling.Rmd).  Copy the contents of the Rmd file into a blank file in the RStudio editor.
+  * [Slides](Slides/SamplingResampling/TeachingWithSampling.html) and the [Rmd document](Slides/SamplingResampling/TeachingWithSampling.Rmd).  Copy the contents of the Rmd file into a blank file in the RStudio editor.
   
 3. Using your own data 
     * A spreadsheet for entering [data in class](https://docs.google.com/spreadsheet/pub?key=0Am13enSalO74dEx3SkRFQlByNGFtM21FSUdHeWFfVkE&single=true&gid=0&output=csv)
