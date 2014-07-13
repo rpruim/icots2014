@@ -50,7 +50,12 @@ to R [Randy]
 
 6. What are the biggest obstacles to teaching with R?   Use this [google doc](https://docs.google.com/document/d/1Q5a2lk9wNgUex5H60RXFgg4GjdQ9KGuJfpmnqPZHeXg/edit?usp=sharing) to contribute your ideas.
 
-### Sunday Afternoon, July 13, 2014
+
+#### Homework
+
+Write a short essay (in Rmd format) about a specific topic you would like to teach with R (e.g. chi-squared), and publish it to the workshop's account at <http://www.Rpubs.com/ICOTS-MOSAIC>.  Reminder: the password is "ICOTS2014".
+
+### Sunday Morning, July 13, 2014
 
 1. Introducing RMarkdown into your workflow [Nick and Randy]
   * [Prezi](http://prezi.com/e7wtfnacj9ub/)
@@ -58,7 +63,9 @@ to R [Randy]
   * [the mosaic template](Resources/MarkdownTemplate-Rmd.html)
   
 2. Sampling and Resampling in R [Danny]
-  * [Slides](Slides/SamplingResampling.html)
+  * [Slides](Slides/SamplingResampling/TeachingWithSampling.html) and the [Rmd document](TeachingWithSampling.Rmd).  Copy the contents of the Rmd file into a blank file in the RStudio editor.
   
 3. Using your own data 
+    * Link to notes will go here.
+    * A spreadsheet for entering [data in class](https://docs.google.com/spreadsheet/pub?key=0Am13enSalO74dEx3SkRFQlByNGFtM21FSUdHeWFfVkE&single=true&gid=0&output=csv)
 
