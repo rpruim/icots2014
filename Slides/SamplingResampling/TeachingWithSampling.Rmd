@@ -1,0 +1,310 @@
+---
+title: "Teaching with Sampling"
+author: "Danny Kaplan"
+date: "ICOTS Project MOSAIC Workshop; July 12-13, 2014"
+output:
+  html_document:
+    fig_height: 4
+    fig_width: 5
+---
+
+```{r include=FALSE}
+require(mosaic)
+require(dplyr)
+require(knitr)
+opts_chunk$set( tidy=FALSE, size='small',comment=NA)
+```
+
+## The Influence of Technology
+
+Much of what we do is the result of an adaptation to specific technology.
+
+### Example: Computational Instructions
+
+**Technology**: Printing, chalk, pencil, paper
+
+With this physical technology, techniques for teaching were developed.
+
+* Algebraic notation.
+* Use of simple quantities: e.g. mean, proportion, standard deviation, ...
+
+These established approaches have merits and demerits:
+
+* **plus** We learned things this way, so we're good at it.
+* **plus** They are accepted and considered proper.
+* **minus** Students are (broadly speaking) not good at reading or interpreting algebra.
+* **minus** Quantities such as the mean are not very engaging.
+* **minus** The approach doesn't scale to the needs of most of today's users of statistics.
+    * Data are too big to use the algebraic formulas.
+    * The algebra requires a lot of background to move beyond the very simple.
+        * Multiple regression & linear algebra.
+    * Many important statistical approaches don't have algebraic representations.  (Example: What's the formula for fitting a logistic model?)
+* **minus** The algebra is a distant and abstract representation of the underlying logic of statistics.
+    
+**A New Technology**: Software 
+    Packaging up operations so that they can be performed knowing only the interface.
+    
+Examples:
+```{r}
+xyplot( height ~ father, data=Galton )
+```
+
+```{r}
+t.test( height ~ sex, data=Galton)
+```
+
+
+## A Challenge and an Opportunity
+
+We can easily provide students with just about any possible statistical operation.
+
+* What operations will help students learn statistical thinking?
+* What new ways of interacting with students become possible?
+
+## Fundamental Statistical Operations
+
+Nominate candidates, please*
+
+* [your answer here]
+* [your answer here]
+* and so on
+
+## My Candidates
+
+* To be revealed.
+* ...
+* ...
+
+## TenMileRace
+
+Give this command:
+```
+help(TenMileRace)
+```
+
+Focus on these three variables: `net`, `age`, & `sex`
+
+Take two minutes and tell me what you see.
+
+### What the ICOTS Participants Saw and Concluded ...
+
+[Your work will go here.]
+
+### All Together Now ...
+
+Let's have everyone do this same analysis on the same data.  
+
+* Do different people get different results? 
+    Explain why or why not.
+
+### A Different Use for These Data
+
+Imagine that you are studying runners' performance.  You need to collect some data.
+
+You can't practically study every runner, so you will take a sample.
+
+## The Most Important Template
+
+<style type="text/css">
+span.boxed {
+  border:5px solid gray;
+  border-radius:10px;
+  padding: 5px;
+}
+span.invboxed {
+  border:5px solid gray;
+  padding: 5px;
+  border-radius:10px;
+  color: white;
+}
+table, td, th
+{
+border:0px;
+}
+</style>
+
+&nbsp;
+<center>
+<h2><strong><span class="boxed">goal</span> ( <span class="boxed">&nbsp;y&nbsp;</span> ~ <span class="boxed">&nbsp;x&nbsp;</span> , data = <span class="boxed">mydata</span> )</strong> 
+</h2></center>
+ 
+&nbsp;
+
+We've used this template to do calculations on data.  But what are the data?
+
+One way to think of it ...
+
+&nbsp;
+<center>
+<h2><strong><span class="boxed">goal</span> ( <span class="boxed">&nbsp;y&nbsp;</span> ~ <span class="boxed">&nbsp;x&nbsp;</span> , data = <span class="boxed">sample(thepopulation)</span> )</strong> 
+</h2></center>
+ 
+&nbsp;
+
+## Sampling as an Operation
+
+The mosaic `sample()` function takes a [simple random sample](http://en.wikipedia.org/wiki/Simple_random_sample). 
+
+Example:
+```{r}
+sample(Galton, size=3)
+```
+
+You try it.  Did you get the same result?
+
+## Sampling Produces Variation
+
+Let's look at the proportion of runners of each sex in a sample of size $n=100$.
+
+```{r}
+tally( ~ sex, format = 'proportion', 
+       data = sample(TenMileRace, size = 100) )
+```
+
+Did you get the same result?  Why or why not?
+
+Let's look at your results.
+
+* Ask a couple of students
+* Ask others who have much larger or smaller results.
+* Beep when I'm pointing near your answer 
+
+![a scale from zero to one](https://dl.dropboxusercontent.com/u/5098197/ICOTS/zero-to-one.png)
+
+## How about $n=400$
+
+```{r}
+tally( ~ sex, format = 'proportion', 
+       data = sample(TenMileRace, size = 400) )
+```
+
+* Beep when I'm pointing near your answer 
+
+![a scale from zero to one](https://dl.dropboxusercontent.com/u/5098197/ICOTS/zero-to-one.png)
+
+## Now, $n=1600$
+
+```{r}
+tally( ~ sex, format = 'proportion', 
+       data = sample(TenMileRace, size = 1600) )
+```
+
+* Beep when I'm pointing near your answer 
+
+![a scale from zero to one](https://dl.dropboxusercontent.com/u/5098197/ICOTS/zero-to-one.png)
+
+## What's the Pattern?
+
+What is the pattern in the spread of answers?
+
+## If you wanted to do it all yourself
+
+```{r}
+Trials <- do(1000)* tally( ~ sex, format = 'proportion', 
+       data = sample(TenMileRace, size = 400) )
+freqpolygon( ~ F, data = Trials )
+```
+
+Tell me how to compute the standard error.
+
+Do this calculation for sample sizes $n=$100, 400, 1600 and tell me the standard error:
+
+$n$ | SE
+----|----
+100 |
+100 |
+400 |
+400 |
+1600| 
+1600|
+
+## Schematic of the Sampling Distribution
+
+![sampling distribution](https://dl.dropboxusercontent.com/u/5098197/ICOTS/sampling-distribution.png)
+
+## Back toward the Real World
+
+We don't often have the chance to get multiple samples from our population, like the 1000 samples taken above.
+
+* Samples are expensive, time consuming, and potentially destructive.
+* If we could take many samples, we would be well to combine them into one larger sample.
+
+## Resampling Distribution
+
+![resampling distribution](https://dl.dropboxusercontent.com/u/5098197/ICOTS/resampling-distribution.png)
+
+## The resample() function
+
+As an example, start with a very small data set:
+
+```{r}
+GaltonSmall <- sample(Galton, size = 5)
+GaltonSmall
+```
+
+What's going on with `resample()`?
+
+```{r}
+resample( GaltonSmall )
+```
+
+You do it several times.
+
+## Contest
+
+Can anyone get a resample with two or fewer of the original cases?
+
+How about the same case repeated five times?
+
+## The Re-Sampling Distribution of the Mean (or whatever)
+
+```{r}
+Trials <- do(1000) * mean( ~ height, data = resample(Galton) )
+# Now find the standard error
+```
+
+### Example: Do Husbands and Wives have Related Heights
+
+Use the correlation coefficient: `cor(father ~ mother, data=)`
+
+What's your answer?  
+
+#### Technical Note: 
+
+The case in `Galton` is a child.  We should look at the relationship between husband and wife based on families.  An instructor might want to give students the commands to do this, without having the student try to construct them.
+
+```{r}
+ByFamily <- Galton %>% group_by(family) %>% sample_n(size=1) 
+```
+
+Use `ByFamily` to find the correlation and it's resampling distribution.
+
+
+
+### Example: Do Sons and Fathers have Related Heights
+
+This is the problem Galton studied:
+
+```{r}
+Boys <- subset(Galton, sex=='M')
+Trials2 <- do(1000)*cor( father ~ height, data = resample(Boys))
+```
+
+
+## Hypothesis Testing
+
+Use `shuffle()`.
+
+
+What's a typical p-value when the Null Hypothesis is right?
+
+```{r}
+NullPvalues <- do(1000)*t.test( height ~ shuffle(sex), data=Galton )$p.value
+```
+
+
+
+
+
+## The Modeling Template
+
