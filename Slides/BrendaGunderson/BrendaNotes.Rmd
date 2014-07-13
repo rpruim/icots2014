@@ -1,0 +1,154 @@
+---
+title: "Stat 250 ILP: Linear Regression"
+author: "The ICOTS MOSAIC Workshop Folks"
+date: "July 13, 2014"
+output:
+  html_document:
+    fig_height: 5
+    fig_width: 5
+---
+
+```{r include=FALSE}
+require(mosaic)
+require(dplyr)
+require(foreign)
+require(knitr)
+trellis.par.set(theme=theme.mosaic())
+opts_chunk$set( tidy = FALSE, size = 'small', comment = NA)
+```
+
+The SPSS file "Stats250Data.sav"" (available on CTools) includes data for a sample of 50 students in a previous term.  The variables include:
+
+* Exam 1 Score (out of 75 points) 
+* Exam 2 Score (out of 75 points)
+* Average HW Score (out of 30 points)  
+* Final Exam Score (out of 100 points)  
+
+Your task is to develop a linear model to predict the final exam score, using **one** of the possible predictor variables:  Exam 1 score, Exam 2 score, or Avg HW Score. First, you will decide which variable to use.  Next, you will calculate your prediction equation (or least squares regression line).  
+
+Here are the commands for reading in the `.sav` files.
+```{r}
+Attention <- read.spss('Attention.sav', to.data.frame = TRUE)
+Performance <- read.spss('Stats250Data.sav', to.data.frame = TRUE)
+head(Performance,3)
+```
+
+### 1. Which Variable?
+
+Which variable will you use to predict the final exam score for a future student?  
+
+> Prof. Gunderson, I don't understand why we should use just one of the predictors.  I'll try something more elaborate first:
+
+    ```{r}
+mod1 <- lm(Final ~ AvgHW + Exam1 + Exam2, data = Performance)
+predFun1 <- makeFun(mod1)
+```
+
+
+Why did you choose this variable? (Hint: The best answer will require some investigation via SPSS.)
+
+> I'll try to see which, if any, of the predictors are actually predictive. ANOVA might be good for this.
+
+    ```{r}
+anova(mod1)
+```
+
+> It looks like all of the predictors are pulling their weight.  Their sums of squares are larger than the residual sums of squares.  Their mean squares are much, much larger. So this model looks good!
+
+> Since I'm using all the predictors, there's not much that could be added in.  I'll try some interaction terms.
+
+    ```{r}
+mod2 <- lm( Final ~ AvgHW * Exam1 * Exam2, data = Performance)
+predFun2 <- makeFun(mod2)
+anova(mod2)
+```
+
+With this, I get [bubkis](http://en.wiktionary.org/wiki/bupkis).
+
+
+### 2. Regression
+
+Perform the regression analysis with ~~~SPSS~~~ R.  Write your prediction equation below.  Be sure to use proper notation, and define variables, if appropriate.
+
+>  Whoa!  How about looking at the data first?
+
+```{r}
+pairs( Final ~ AvgHW + Exam1 + Exam2, data = Performance)
+```
+
+> Nothing too outrageous.  It's odd that different people are choking on the different exams.  
+
+```{r}
+summary(mod1)
+```
+
+> My prediction equation is:
+    $$ \widehat{Final} = 7.15 + 1.077 HW_{avg} + 0.266 Exam_1 + 0.528 Exam_2 $$
+
+Variable | 	Value
+---------|--------
+Exam 1	 | 58
+Exam 2	 | 50
+Avg HW	 | 25.6
+
+3. 	Use your equation to predict the final exam score for a student whose other scores are given in the table.  Note:  you will only need to use one of the values in this table.
+
+   ```{r}
+   predFun1(AvgHW = 25.6, Exam1 = 58, Exam2 = 50)
+   ```
+
+
+>	Predicted final exam score = 76.5
+
+
+
+	These scores are for Student #11 who actually scored 92 out of 100 on the final exam.  
+	Compute the corresponding residual for this student.
+
+>       
+   ```{r}
+   92 - predFun1(AvgHW = 25.6, Exam1 = 58, Exam2 = 50)
+   ```	
+   
+> That student did really well considering what they had done before.
+
+#### 4.	Issues?
+
+What are some issues you might consider before using this equation to predict the final exam score for yourself?  
+
+> Some issues:
+    * I get anxious if I have to meet some kind of entirely artificial standard.  I do better when I can just go with the flow and be me.  Que sera, sera.
+    * We haven't looked to see what the confidence intervals are for the model predictions.
+        
+```{r}
+predFun1(AvgHW = 25.6, Exam1 = 58, Exam2 = 50,
+    interval='prediction')
+```
+
+> OK.  The actual score of 92 is good, but it's not way outside of the confidence interval for the prediction.
+
+> Maybe I should go back and look at subsets of variables, but:
+
+    * The predictors don't seem to have multicollinearity.
+    * The World Cup final game starts in a bit.
+
+
+### 5. 	Regression Analysis
+
+Use your regression analysis to complete the following statements:
+	
+	Approximately **65** % of the variation in the final exam scores can be explained 
+
+by the linear relationship between final exam scores and **the predictor variables**.
+
+
+	We estimate the predicted final exam score (using our model) to be off 
+
+from the observed final exam scores by about $\sqrt{47}$ points, on average. (Looking at the mean square residual from the first ANOVA report.)  
+
+Hint: this quantity is sometimes referred to as approximately the average size of the residuals.
+
+
+Does there appear to be a significant positive linear relationship between your selected predictor variable and final exam score?  Use a 5% significance level and provide support for your answer.
+
+> Well yeah!  The p-values are totally righteous.
