@@ -54,8 +54,7 @@ to R [Randy]
 1. Introducing RMarkdown into your workflow [Nick and Randy]
   * [Prezi](http://prezi.com/e7wtfnacj9ub/)
   * [paper by Baumer, et al](http://escholarship.org/uc/item/90b2f5xh)
-  * RMarkdown walk through
-    * [the mosaic template](Resources/MarkdownTemplate.txt)
+  * [the mosaic template](Resources/MarkdownTemplate.txt)
   
 2. Sampling and Resampling in R [Danny]
   * [Slides](Slides/SamplingResampling.html)
