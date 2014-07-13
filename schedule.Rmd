@@ -37,12 +37,17 @@ Use this  [google doc](https://docs.google.com/document/d/1Q5a2lk9wNgUex5H60RXFg
 ### Saturday Afternoon, July 12, 2014
 
 1. Welcome
-#. Getting onto your [RStudio server](http://acc.calvin.edu:8787) account
-#. An introduction to R in RStudio [Nick]
-#. [Less Volume, More Creativity](Slides/LessVolume.html) -- a quick start guide to R [Randy]
-#. Using RMarkdown in the classroom [Nick]
-#. What are the biggest obstacles to teaching with R?   Use this [google doc](https://docs.google.com/document/d/1Q5a2lk9wNgUex5H60RXFgg4GjdQ9KGuJfpmnqPZHeXg/edit?usp=sharing) to contribute
-your ideas.
+
+2. Getting onto your [RStudio server](http://acc.calvin.edu:8787) account
+
+3. An introduction to R in RStudio [Nick]
+
+4. [Less Volume, More Creativity](Slides/LessVolume.html) -- a quick start guide
+to R [Randy]
+
+5. Using RMarkdown in the classroom [Nick]
+
+6. What are the biggest obstacles to teaching with R?   Use this [google doc](https://docs.google.com/document/d/1Q5a2lk9wNgUex5H60RXFgg4GjdQ9KGuJfpmnqPZHeXg/edit?usp=sharing) to contribute your ideas.
 
 ### Sunday Afternoon, July 13, 2014
 
@@ -50,6 +55,9 @@ your ideas.
   * [Prezi](http://prezi.com/e7wtfnacj9ub/)
   * [paper by Baumer, et al](http://escholarship.org/uc/item/90b2f5xh)
   * RMarkdown walk through
-#. [Sampling and Resampling in R](Slides/SamplingResampling.html) [Danny]
-#. Using your own data 
+  
+2. Sampling and Resampling in R [Danny]
+  * [Slides](Slides/SamplingResampling.html)
+  
+3. Using your own data 
 
