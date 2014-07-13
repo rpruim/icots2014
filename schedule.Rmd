@@ -45,7 +45,8 @@ Use this  [google doc](https://docs.google.com/document/d/1Q5a2lk9wNgUex5H60RXFg
 4. [Less Volume, More Creativity](Slides/LessVolume.html) -- a quick start guide
 to R [Randy]
 
-5. Using RMarkdown in the classroom [Nick]
+5. Brief Intro to RMarkdown and RPubs [Danny]
+  * You can see your published documents [here](https://rpubs.com/ICOTS-MOSAIC)
 
 6. What are the biggest obstacles to teaching with R?   Use this [google doc](https://docs.google.com/document/d/1Q5a2lk9wNgUex5H60RXFgg4GjdQ9KGuJfpmnqPZHeXg/edit?usp=sharing) to contribute your ideas.
 
