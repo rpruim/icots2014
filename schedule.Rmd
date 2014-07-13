@@ -27,7 +27,7 @@ To get an even more recent version, use
 ```{r eval=FALSE}
 install.packages("devtools")
 require(devtools)
-install_github("mosaic","rpruim")
+install_github("mosaic","rpruim","beta")  
 ```
 
 ### Feedback
