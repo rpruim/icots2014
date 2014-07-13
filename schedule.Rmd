@@ -46,6 +46,9 @@ your ideas.
 
 ### Sunday Afternoon, July 13, 2014
 
-1. Resampling [Danny]
-#. Other topics TBD
+1. Introducing RMarkdown into your workflow [Nick]
+  * [Prezi](http://prezi.com/e7wtfnacj9ub/)
+  * [paper by Baumer, et al](http://escholarship.org/uc/item/90b2f5xh)
+#. Resampling [Danny]
+#. Using your own data [Randy]
 
