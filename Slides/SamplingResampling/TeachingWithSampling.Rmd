@@ -63,17 +63,22 @@ We can easily provide students with just about any possible statistical operatio
 
 ## Fundamental Statistical Operations
 
-Nominate candidates, please*
+Nominate candidates, please
 
-* [your answer here]
-* [your answer here]
-* and so on
+* getting a p-value
+* regression in two variables
+* getting a sampling distribution
+* getting a CI
+* identifying problems/cleaning data
+* interpreting CI
+
 
 ## My Candidates
 
-* To be revealed.
-* ...
-* ...
+* Sample
+* Describing Relationships
+* Randomization
+* Repeating stuff
 
 ## TenMileRace
 
@@ -88,7 +93,19 @@ Take two minutes and tell me what you see.
 
 ### What the ICOTS Participants Saw and Concluded ...
 
-[Your work will go here.]
+A positive relationship between `net` and `age`:
+
+```{r}
+xyplot( net ~ age | sex, data=TenMileRace, alpha=.1)
+```
+
+```{r}
+median( net ~ sex, data=TenMileRace)
+```
+
+```{r}
+tally(~ sex, data=TenMileRace, format="proportion")
+```
 
 ### All Together Now ...
 
@@ -209,13 +226,13 @@ Tell me how to compute the standard error.
 
 Do this calculation for sample sizes $n=$100, 400, 1600 and tell me the standard error:
 
-$n$ | SE
+  n | SE
 ----|----
-100 |
-100 |
-400 |
-400 |
-1600| 
+100 | ?
+100 | ?
+400 | ?
+400 | ?
+1600|  ?
 1600|
 
 ## Schematic of the Sampling Distribution
@@ -308,3 +325,107 @@ NullPvalues <- do(1000)*t.test( height ~ shuffle(sex), data=Galton )$p.value
 
 ## The Modeling Template
 
+Let's teach the variety of "tests" using one framework that they all have in common.  So put the zoo of tests aside for a moment --- the t-tests, the p-tests, the tests of r and R^2, chi-squared, etc.  Instead, point out that they are all varieties of animal.
+
+The common framework is the linear model: a response variable broken down by one or more explanatory variables.
+
+* Two-sample t-test
+```{r}
+mod1 <- lm( height ~ sex, data=Galton )
+summary(mod1)
+```
+
+* Single proportions
+```{r}
+mod2 <- lm( sex=='F' ~ 1, data=TenMileRace)
+confint(mod2)
+summary( mod2 )
+```
+
+The answer is exactly the same as you would get from the familiar formula: $\sqrt{\hat{p} (1-\hat{p})/n$:
+```{r}
+sqrt( .5008*(1-.5008)/nrow(TenMileRace))
+```
+
+* Difference of two proportions:
+    Here, we'll look at whether the fraction of females in the workforce is the same for unionized and non-union workers (in 1985, per the `CPS85` data in `mosaic`).
+    ```{r}
+mod3 <- lm( sex=="F" ~ union, data=CPS85)
+confint(mod3)
+summary(mod3)
+```
+Yes, women appear in a much smaller proportion among unionized workers (in 1985).
+
+* One sample t test
+    Is the height of Galton's subjects different from 65 inches?
+    `1` stands for a variable that is the same for every case, as if there were a column of ones in the data frame.
+    ```{r}
+mod4 <- lm( height-65 ~ 1, data = Galton)
+confint( mod4 )
+summary(mod4)
+```
+
+* Multiple regression
+    ```{r}
+mod5 <- lm( height ~ father + mother + sex, 
+            data = Galton)
+confint(mod5)
+summary(mod5)
+```
+
+* Simple regression
+    ```{r}
+mod6 <- lm( height ~ father, data=Galton )
+summary(mod6)
+```
+
+
+* One-way ANOVA
+    Here we look at the wage in different sectors of the economy.
+    ```{r}
+bwplot( wage ~ sector, data=CPS85 )
+mod7 <- lm( wage ~ sector, data=CPS85 )
+anova(mod7)
+```
+
+* Two-way ANOVA
+    ```{r}
+mod8 <- lm( wage ~ sex + union, data = CPS85)
+anova(mod8)
+```
+
+* Two-way ANOVA with interaction
+    ```{r}
+mod9 <- lm( wage ~ sex + union + sex:union, data = CPS85)
+anova(mod9)
+```
+
+* Analysis of covariance
+    ```{r}
+mod10 <- lm( wage ~ age + sex, data=CPS85)
+summary(mod10)
+```
+
+### Note about proportions ...
+
+`lm()` is a perfectly good way to calculate the differences in proportions among discrete groups.
+
+When using multiple explanatory variables, `lm()` can generate proportions outside the range 0 to 1.  The reason is that the linear model is too "stiff."  Fix that by using logistic regression, which is remarkably similar to `lm()`
+
+```{r}
+mod11 <- glm( sex=='F' ~ age + educ + union, data=CPS85)
+summary(mod11)
+```
+
+Admittedly, the coefficients in logistic regression need to be interpreted in terms of ratios of log likelihoods.  That's a mouthful.  But there are two helpful simplifications:
+
+1. A positive coefficient means "higher proportion."  A negative coefficient means "lower proportion."
+2. The proportion itself is easily graphed using the function technique.
+
+```{r}
+fun11 <- makeFun(mod11)
+plotFun( fun11( age=age, union='Not',educ=12)~age,
+         age.lim=range(20,80), ylim=range(.3,.7))
+plotFun( fun11( age=age, union='Union',educ=12)~age,
+         add=TRUE, col='red' )
+```
