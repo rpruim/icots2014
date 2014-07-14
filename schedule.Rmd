@@ -63,7 +63,7 @@ Write a short essay (in Rmd format) about a specific topic you would like to tea
   * [the mosaic template](Resources/MarkdownTemplate-Rmd.html)
   
 2. Sampling and Resampling in R [Danny]
-  * [Slides](Slides/SamplingResampling/TeachingWithSampling.html) and the [Rmd document](TeachingWithSampling.Rmd).  Copy the contents of the Rmd file into a blank file in the RStudio editor.
+  * [Slides](Slides/SamplingResampling/TeachingWithSampling.html).  For those from the workshop who want to read the Rmd document, [here it is](Slides/SamplingResampling/TeachingWithSampling.Rmd). 
   
 3. Using your own data 
     * Link to notes will go here.
